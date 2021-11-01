@@ -13,7 +13,7 @@ There are users list, add new user button and actions to edit or delete.
 
 Adding new user.
 
-![alt text](https://github.com/roychanmeliaz/angular-dotnet-crud-staff/blob/main/screenshot_main.png)
+![alt text](https://github.com/roychanmeliaz/angular-dotnet-crud-staff/blob/main/screenshot_add.png)
 
 **3. _Reactive Form Validation 1_**
 
