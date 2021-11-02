@@ -17,6 +17,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UsersListComponent } from './component/users-list/users-list.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
 
 // --- angular material end ---
 
@@ -31,13 +32,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     MatIconModule,
     MatToolbarModule,
-    MatGridListModule,
+    MatGridListModule,  
     MatTableModule,
     MatButtonModule,
     HttpClientModule,
     MatInputModule,
     ReactiveFormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

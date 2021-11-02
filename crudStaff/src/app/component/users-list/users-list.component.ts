@@ -39,6 +39,7 @@ export class UsersListComponent implements OnInit {
       confirmPassword: new FormControl('',[
         this.triggerRequiredConditionally,
         // Validators.required,
+        Validators.minLength(6),
       ]),
     })
   }
@@ -52,9 +53,7 @@ export class UsersListComponent implements OnInit {
     }
   }
 
-  usersList:Users[] = [
-    {id:"0", title:"title", firstName:"firstName", lastName:"lastName", email:"email", role:"role", password:"pass", confirmPassword:"confpass"}
-  ];
+  usersList:Users[] = [];
 
   constructor(
     private usersService:UsersService,
@@ -131,6 +130,7 @@ export class UsersListComponent implements OnInit {
   }
 
   editButton(id:string) {
+    this.cancelButton();
     this.inputMode=2;
     // setTimeout(() => 
     // {
@@ -195,6 +195,9 @@ export class UsersListComponent implements OnInit {
       if (this.email?.errors?.required) {
         errmsg+="\n- Email required."
       }
+      if (this.email?.errors?.email) {
+        errmsg+="\n- Email format invalid."
+      }
       if (this.role?.errors?.required) {
         errmsg+="\n- Role required."
       }
@@ -207,7 +210,15 @@ export class UsersListComponent implements OnInit {
       if (this.confirmPassword?.errors?.required) {
         errmsg+="\n- Confirm Password required."
       }
+      if (this.password?.errors?.minlength) {
+        errmsg+="\n- Confirm Password minimum 6 characters."
+      }
       this.openSnackBar("Please insert form in the correct format:\n" + errmsg, "OK");
+      return false;
+    }
+    if (this.password?.value != this.confirmPassword?.value) {
+      this.openSnackBar("Please insert form in the correct format:\n" + "Password and Confirm Password did not match.", "OK");
+      return false;
     }
     return (this.form.inputData.valid)
   }
@@ -244,7 +255,7 @@ export class UsersListComponent implements OnInit {
           console.log(err)
           console.log(err.error.message)
           console.log("end err")  
-          this.openSnackBar(err.error.message, "OK");
+          this.openSnackBar("Error! " + err.error.message, "OK");
         }
       );
     }
@@ -268,7 +279,7 @@ export class UsersListComponent implements OnInit {
       },
       (err) => {
         console.log(err)
-        this.openSnackBar(err, "OK");
+        this.openSnackBar("Error! " + err.error.message, "OK");
       });
     }
     console.log(this.form.inputData.value);
